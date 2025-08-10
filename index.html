@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All Saints Church Wick — Mockup Homepage</title>
+
+  <!-- Bulma CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <!-- Modern Sans Serif: PT Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #f7f7f9; font-family: 'PT Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .skip-link{
+      position:absolute; left:0; top:-40px; background:#3273dc; color:#fff; padding:8px 12px; z-index:1000;
+    }
+    .skip-link:focus{ top:0; }
+    .banner-hero{
+      background-image: url('banner-building.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .banner-hero .hero-body{
+      background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%);
+    }
+    .banner-hero .title, .banner-hero .subtitle{
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+    }
+    /* Overlay titles on card images */
+    .overlay-card .card-image { position: relative; }
+    .card-title-overlay{
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 1rem 1rem;
+      color: #fff;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+    }
+    .card-title-overlay .title{ color:#fff; margin:0; text-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+    /* Neutral card style: no shadow, no radius */
+    .card {
+      box-shadow: none;
+      border-radius: 0;
+      background: #fff;
+    }
+    .card .card-image, .card .card-content, .card .card-header { border-radius: 0 !important; }
+    .card .image img { border-radius: 0 !important; }
+    .overlay-card .overlay-link{ display:block; color: inherit; text-decoration: none; }
+
+    /* Primary theme color overrides (#1795D4) */
+    .has-text-primary { color: #1795D4 !important; }
+    .has-background-primary { background-color: #1795D4 !important; }
+    .is-primary { background-color: #1795D4 !important; border-color: #1795D4 !important; color: #fff !important; }
+    .button.is-primary:hover,
+    .is-primary:hover { background-color: #1383bb !important; border-color: #1383bb !important; }
+    .button.is-primary.is-light {
+      background-color: #e8f5fc !important;
+      color: #1795D4 !important;
+      border-color: #e8f5fc !important;
+    }
+
+    /* Buttons: square corners + bold text */
+    .button { border-radius: 0 !important; font-weight: 700 !important; }
+
+    /* Dark footer */
+    .footer { background: #111; color: #fff; }
+    .footer a { color: #fff; }
+    .footer a:hover { color: #d6eafb; text-decoration: underline; }
+    .footer a:focus { color: #d6eafb; outline: 2px solid #d6eafb; outline-offset: 2px; }
+    .footer strong { color: #d6eafb; }
+
+    /* Link color */
+    a { color: #112F4B; }
+    a:hover { color: #0e253b; text-decoration: underline; }
+    .navbar .navbar-item, .navbar .navbar-link { color: #112F4B; }
+    .navbar .navbar-item:hover, .navbar .navbar-link:hover { color: #0e253b; }
+    /* Navbar dropdown carets: lighter contrast */
+    .navbar .navbar-link:not(.is-arrowless)::after {
+      border-color: rgba(17,47,75,0.35) !important;
+    }
+    .navbar .navbar-link:hover:not(.is-arrowless)::after,
+    .navbar .navbar-link.is-active:not(.is-arrowless)::after,
+    .navbar-item.has-dropdown.is-active > .navbar-link:not(.is-arrowless)::after {
+      border-color: rgba(14,37,59,0.35) !important;
+    }
+    /* Remove shadow from Know/Love/Follow boxes */
+    #beliefs .box { box-shadow: none; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Navbar -->
+  <nav class="navbar is-white is-spaced" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#" aria-label="All Saints Wick home">
+          <img src="all-saints-logov2.png" alt="All Saints Wick" style="max-height: 3rem; height: 3rem; width: auto;">
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="mainNav" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item is-active" href="#">Home</a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">New Here?</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="#sundays">Service Times</a>
+              <a class="navbar-item" href="#find-us">How to Find Us</a>
+              <a class="navbar-item" href="#faq">What We Believe</a>
+              <a class="navbar-item" href="#faq">What to Expect</a>
+              <a class="navbar-item" href="#team">Meet the Team</a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Watch & Listen</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="#online">Watch Live</a>
+              <a class="navbar-item" href="#watch-past">Watch Past Services</a>
+              <a class="navbar-item" href="#talks">Sermons & Talks</a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Church Life</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="#sundays">Sunday Services</a>
+              <a class="navbar-item" href="#families">Children & Families</a>
+              <a class="navbar-item" href="#youth">Youth</a>
+              <a class="navbar-item" href="#groups">Small Groups</a>
+              <a class="navbar-item" href="#serve">Serving Opportunities</a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Community</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="#wick-hall">Wick Hall</a>
+              <a class="navbar-item" href="#garden">Garden Room Café</a>
+              <a class="navbar-item" href="#chaplains">Town Chaplains</a>
+              <a class="navbar-item" href="#community-groups">Community Groups</a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Events</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="#whats-on">What’s On This Week</a>
+              <a class="navbar-item" href="#year-of-faith">Year of Faith 2025</a>
+              <a class="navbar-item" href="#special-services">Special Services & Celebrations</a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Resources</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="#downloads">Downloads</a>
+              <a class="navbar-item" href="#weekly-sheet">Notices & Weekly Sheet</a>
+              <a class="navbar-item" href="#prayer">Prayer Resources</a>
+            </div>
+      </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Members</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="#directory">Member Directory</a>
+              <a class="navbar-item" href="#volunteer">Volunteer Resources</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner Hero -->
+  <section class="hero is-medium banner-hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title is-1">Welcome to All Saints, Wick</h1>
+        <h2 class="subtitle is-4">We aim to Know, Love & Follow Jesus</h2>
+        <div class="buttons">
+          <a class="button is-primary is-large" href="#online">Watch Live</a>
+          <a class="button is-warning is-light is-large" href="#new-here">Plan Your First Visit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main" role="main">
+    <!-- What's On This Week -->
+    <section class="section" id="whats-on">
+      <div class="container">
+        <h2 class="title is-3">What’s On This Week</h2>
+        <div class="columns is-variable is-5 is-multiline">
+          <!-- Sun 10:00 All-age Service -->
+          <div class="column is-12-tablet is-3-desktop">
+            <div class="card overlay-card">
+              <a class="overlay-link" href="#online">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="https://static.photos/people/640x360/521" alt="All-age Service 10:00">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-4">All-age Service</h3>
+                  </div>
+                </div>
+              </a>
+              <div class="card-content">
+                <p class="content"><strong>Sun 10:00</strong> · All Saints · <a href="#online">Livestream</a></p>
+              </div>
+        </div>
+        </div>
+
+          <!-- Sun 18:00 Praise & Prayer -->
+          <div class="column is-12-tablet is-3-desktop">
+            <div class="card overlay-card">
+              <a class="overlay-link" href="#whats-on">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="https://static.photos/people/640x360/522" alt="Praise & Prayer 18:00">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-4">Praise & Prayer</h3>
+                  </div>
+                </div>
+              </a>
+              <div class="card-content">
+                <p class="content"><strong>Sun 18:00</strong> · Wick Hall</p>
+        </div>
+            </div>
+          </div>
+
+          <!-- Tue 10:00 Tots on Tuesday -->
+          <div class="column is-12-tablet is-3-desktop">
+            <div class="card overlay-card">
+              <a class="overlay-link" href="#families">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="https://static.photos/people/640x360/523" alt="Tots on Tuesday 10:00">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-4">Tots on Tuesday</h3>
+                  </div>
+                </div>
+              </a>
+              <div class="card-content">
+                <p class="content"><strong>Tue 10:00</strong> · Wick Hall</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thu 19:30 Homegroups -->
+          <div class="column is-12-tablet is-3-desktop">
+            <div class="card overlay-card">
+              <a class="overlay-link" href="#groups">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="https://static.photos/people/640x360/524" alt="Homegroups 19:30">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-4">Homegroups</h3>
+                  </div>
+                </div>
+              </a>
+              <div class="card-content">
+                <p class="content"><strong>Thu 19:30</strong> · Various homes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <a class="" href="#calendar">View Full Calendar</a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Beliefs: Know, Love & Follow Jesus -->
+    <section class="section" id="beliefs">
+      <div class="container">
+        <h2 class="title is-3">Know, Love & Follow Jesus</h2>
+        <p class="subtitle is-5">We aim to Know, Love & Follow Jesus</p>
+        <div class="columns is-variable is-5 is-multiline">
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="box" style="border-radius:0;">
+              <h3 class="title is-4">Know</h3>
+              <div class="content">
+                <p>If God exists, how would we know? Christians believe God made himself known in Jesus of Nazareth. Through his life, death and resurrection we can know God, receive forgiveness and share new life.</p>
+                <p>These are extraordinary claims. We’d love to explain why we believe. Alpha is a relaxed space to ask big questions.</p>
+              </div>
+              <a class="button is-primary" href="#alpha">Explore Alpha</a>
+            </div>
+          </div>
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="box" style="border-radius:0;">
+              <h3 class="title is-4">Love</h3>
+              <div class="content">
+                <p>Knowing God leads to love for God and others. As we open the Bible and gather on Sundays and in small groups, God’s Spirit grows a strong, transforming love that makes a real difference.</p>
+                <p>It’s the kind of love that empowered Jesus to give his life—and it shapes us today.</p>
+              </div>
+              <a class="button" href="#groups">Join a Group</a>
+            </div>
+          </div>
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="box" style="border-radius:0;">
+              <h3 class="title is-4">Follow</h3>
+              <div class="content">
+                <p>Following Jesus is a daily calling—speaking good news and living to honour him in our communities. It’s not always easier, but it’s a great adventure with God at work.</p>
+                <p>You’re invited to discover what it means to know, love and follow him.</p>
+              </div>
+              <a class="button" href="#sundays">Join us on Sunday</a>
+            </div>
+          </div>
+        </div>
+        <div class="buttons">
+          <a class="" href="#beliefs-more">More on What We Believe</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore Church Life -->
+    <section class="section" id="explore">
+      <div class="container">
+        <h2 class="title is-3">Explore Church Life</h2>
+        <div class="columns is-multiline is-variable is-5">
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card" id="sundays">
+              <a class="overlay-link" href="#sundays">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="https://static.photos/people/640x360/301" alt="Sundays & Services">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-2">Sundays & Services</h3>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card">
+              <a class="overlay-link" href="#families">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="kids-group.png" alt="Families & Kids">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-2">Families & Kids</h3>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card">
+              <a class="overlay-link" href="#youth">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="https://static.photos/people/640x360/303" alt="Youth & Young Adults">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-2">Youth & Young Adults</h3>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card">
+              <a class="overlay-link" href="#directory">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="https://static.photos/people/640x360/304" alt="Member Directory">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-2">Member Directory</h3>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card">
+              <a class="overlay-link" href="#serve">
+                <div class="card-image">
+                  <figure class="image is-16by9">
+                    <img src="https://static.photos/people/640x360/305" alt="Community & Volunteering">
+                  </figure>
+                  <div class="card-title-overlay">
+                    <h3 class="title is-2">Community & Volunteering</h3>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meet our Priest in Charge -->
+    <section class="section" id="story">
+      <div class="container">
+        <div class="box" style="border-radius:0;">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-128x128">
+                <img src="lisa.jpg" alt="Rev Lisa Fairman-Brown">
+              </p>
+            </figure>
+            <div class="media-content">
+              <h3 class="title is-4">Rev Lisa Fairman-Brown</h3>
+              <p class="subtitle is-6">Priest in Charge</p>
+              <div class="content">
+                <p>Rev Lisa Fairman-Brown joined us on the 12th September 2024.</p>
+                <p>Contact: <a href="mailto:Minister@allsaintswick.org.uk">Minister@allsaintswick.org.uk</a> · <a href="#team">Meet the Team</a></p>
+              </div>
+        </div>
+      </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="section" id="resources">
+      <div class="container">
+        <h2 class="title is-3">Resources</h2>
+        <div class="columns is-variable is-5 is-multiline">
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="box" style="border-radius:0;">
+              <h3 class="title is-5">Download Weekly Sheet (PDF)</h3>
+              <a class="button is-primary" href="#weekly-sheet">Download</a>
+            </div>
+          </div>
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="box" style="border-radius:0;">
+              <h3 class="title is-5">Bible Reading & Prayer Guides</h3>
+              <a class="button" href="#prayer">Open Resources</a>
+            </div>
+          </div>
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="box" style="border-radius:0;">
+              <h3 class="title is-5">Watch Past Services</h3>
+              <a class="button" href="#watch-past">View</a>
+        </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Remove extra tiles; covered by Explore and Resources -->
+
+    <!-- End main content -->
+  </main>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>All Saints Church Wick</strong><br>
+        Sundays 10:00 (All Saints) · 18:00 (Wick Hall)<br>
+        <a href="#contact">Contact Us</a> · <a href="#safeguarding">Safeguarding</a> · <a href="#sitemap">Sitemap</a>
+      </p>
+      <p>
+        <a href="#online">Watch Live</a> · <a href="#online">Watch Back</a> ·
+        <a href="#yt">YouTube</a> · <a href="#fb">Facebook</a> · <a href="#ig">Instagram</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Bulma navbar burger toggle
+    (function() {
+      var burgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      if (burgers.length > 0) {
+        burgers.forEach(function(el) {
+          el.addEventListener('click', function() {
+            var target = el.dataset.target;
+            var $target = document.getElementById(target);
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
