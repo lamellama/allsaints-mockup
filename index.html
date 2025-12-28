@@ -7,14 +7,52 @@
 
   <!-- Bulma CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <!-- Modern Sans Serif: PT Sans -->
-  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Modern Sans Serif: Epilogue with PT Sans fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      /* Palette from template */
+      --blue-bell: #87A7F0;            /* primary */
+      --blue-bell-dark: #6d8cdd;
+      --blue-bell-light: #f0f4ff;
+      --midnight-violet: #0F0F0F;      /* secondary */
+      --text-muted: #666B68;           /* body text */
+      --school-bus-yellow: #ECCE68;    /* accent */
+      --tertiary-gray: #9F9F9F;
+      --bg-base: #ffffff;
+      --bg-alt: #ECECEC;
+      --lancet-border-color: #C5C5C5;
+      --lancet-border-bg: #fdfbf6;
+      --blue-accent-2: #61B0ED;
+      --gold-deep: #BB941C;
+      --deep-forest: #183135;
+      --resource-plum: #543254;
+      --dusty-rose: #AE2121;
+      --violet-accent: #6A58DB;
+      --moss-green: #0D7C6E;
+      --moss-green-dark: #0a5c59;
+      --school-bus-yellow-dark: #c1a14f;
+      --radius-base: 0.45rem;
+      --radius-lg: 1rem;
+      --radius-pill: 999px;
+      --panel-shadow: 0 16px 46px rgba(15, 15, 15, 0.08);
+    }
+
     html { scroll-behavior: smooth; }
-    body { background: #f7f7f9; font-family: 'PT Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    body {
+      background: linear-gradient(180deg, #fdfdfd 0%, #ffffff 45%, #f9f9f9 100%);
+      font-family: 'Epilogue', 'PT Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--midnight-violet);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    ::selection {
+      background: var(--blue-bell);
+      color: #fff;
+    }
     .skip-link{
-      position:absolute; left:0; top:-40px; background:#3273dc; color:#fff; padding:8px 12px; z-index:1000;
+      position:absolute; left:0; top:-40px; background:var(--blue-bell); color:#fff; padding:8px 12px; z-index:1000;
     }
     .skip-link:focus{ top:0; }
     .banner-hero{
@@ -23,70 +61,426 @@
       background-position: center;
     }
     .banner-hero .hero-body{
-      background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%);
+      background: linear-gradient(135deg, rgba(22,16,50,0.30) 0%, rgba(24,149,212,0.35) 50%, rgba(193,110,112,0.25) 100%);
     }
     .banner-hero .title, .banner-hero .subtitle{
       color: #fff;
       text-shadow: 0 2px 10px rgba(0,0,0,0.45);
     }
-    /* Overlay titles on card images */
-    .overlay-card .card-image { position: relative; }
-    .card-title-overlay{
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      padding: 1rem 1rem;
-      color: #fff;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
-    }
-    .card-title-overlay .title{ color:#fff; margin:0; text-shadow: 0 2px 8px rgba(0,0,0,0.35); }
-    /* Neutral card style: no shadow, no radius */
-    .card {
-      box-shadow: none;
-      border-radius: 0;
+    /* Overlay cards: framed panels */
+    .overlay-card {
+      position: relative;
+      border-radius: calc(var(--radius-lg) + 0.35rem);
+      padding: 0;
+      overflow: hidden;
       background: #fff;
+      border: 1px solid var(--lancet-border-color);
+      box-shadow: 0 14px 40px rgba(15, 15, 15, 0.08);
+      --card-text: var(--midnight-violet);
+      --card-accent: var(--blue-bell);
     }
-    .card .card-image, .card .card-content, .card .card-header { border-radius: 0 !important; }
-    .card .image img { border-radius: 0 !important; }
+    .overlay-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
+      pointer-events: none;
+    }
+    .overlay-card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--card-accent);
+      pointer-events: none;
+    }
+    .overlay-card > * {
+      position: relative;
+      z-index: 1;
+      color: inherit;
+    }
     .overlay-card .overlay-link{ display:block; color: inherit; text-decoration: none; }
-
-    /* Primary theme color overrides (#1795D4) */
-    .has-text-primary { color: #1795D4 !important; }
-    .has-background-primary { background-color: #1795D4 !important; }
-    .is-primary { background-color: #1795D4 !important; border-color: #1795D4 !important; color: #fff !important; }
-    .button.is-primary:hover,
-    .is-primary:hover { background-color: #1383bb !important; border-color: #1383bb !important; }
-    .button.is-primary.is-light {
-      background-color: #e8f5fc !important;
-      color: #1795D4 !important;
-      border-color: #e8f5fc !important;
+    .overlay-card .card-image {
+      padding: 1.35rem 1.35rem 0.9rem;
+    }
+    .overlay-card .card-image figure.image {
+      display: block;
+      overflow: hidden;
+      border-radius: var(--radius-base);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .overlay-card .card-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .card-title-overlay{
+      position: static;
+      padding: 0;
+      color: inherit;
+      background: none;
+      text-shadow: none;
+      margin-bottom: 0.4rem;
+    }
+    .card-title-overlay .title{ margin:0.65rem 0 0; color: var(--midnight-violet); letter-spacing: -0.01em; }
+    .overlay-card,
+    .overlay-card h3,
+    .overlay-card p,
+    .overlay-card a,
+    .overlay-card strong,
+    .overlay-card .card-title-overlay .title {
+      color: var(--card-text);
+    }
+    .overlay-card a:hover {
+      color: var(--card-text);
+      opacity: 0.9;
+    }
+    .overlay-card .card-content {
+      padding: 0 1.35rem 1.35rem;
+    }
+    .overlay-card .card-content strong {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      background: rgba(0,0,0,0.03);
+      color: var(--midnight-violet);
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0,0,0,0.06);
+      font-weight: 600;
+    }
+    .card-theme-bluebell { --card-accent: var(--blue-bell); }
+    .card-theme-rose { --card-accent: var(--dusty-rose); }
+    .card-theme-moss { --card-accent: var(--moss-green); }
+    .card-theme-sunrise { --card-accent: var(--school-bus-yellow); }
+    .card-theme-violet { --card-accent: var(--violet-accent); }
+    /* Explore cards: full-color backgrounds */
+    #explore .overlay-card {
+      background: var(--card-accent);
+      border-color: transparent;
+      color: #fff;
+      --card-text: #fff;
+    }
+    #explore .overlay-card::after { display: none; }
+    #explore .overlay-card::before { box-shadow: none; }
+    #explore .overlay-card .card-image {
+      padding: 1.35rem 1.35rem 0.65rem;
+    }
+    #explore .overlay-card .card-image figure.image {
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    #explore .overlay-card .card-title-overlay .title { color: #fff; }
+    #explore .overlay-card .card-content strong {
+      background: rgba(0,0,0,0.18);
+      border-color: rgba(0,0,0,0.28);
+      color: #fff;
+    }
+    #explore .overlay-card a:hover { opacity: 0.92; }
+    /* Light backgrounds: keep text dark */
+    #explore .card-theme-sunrise,
+    #explore .card-theme-bluebell {
+      color: var(--midnight-violet);
+      --card-text: var(--midnight-violet);
+    }
+    #explore .card-theme-sunrise .card-title-overlay .title,
+    #explore .card-theme-bluebell .card-title-overlay .title {
+      color: var(--midnight-violet);
+    }
+    /* Softer card style */
+    .card {
+      box-shadow: 0 12px 30px rgba(15,15,15,0.08);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      border: 1px solid var(--lancet-border-color);
+      overflow: hidden;
+    }
+    .card .card-image,
+    .card .card-content,
+    .card .card-header { border-radius: inherit !important; }
+    .card .image img { border-radius: calc(var(--radius-base) + 0.15rem) !important; }
+    @media (max-width: 768px) {
+      .overlay-card .card-image {
+        padding: 1.25rem 1.25rem 0.25rem;
+      }
+      .overlay-card .card-content {
+        padding: 0 1.25rem 1.25rem;
+      }
+      .lancet-feature {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+      .lancet-arch-figure {
+        max-width: 320px;
+        margin-top: 2.5rem;
+      }
     }
 
-    /* Buttons: square corners + bold text */
-    .button { border-radius: 0 !important; font-weight: 700 !important; }
+    /* Primary theme color overrides */
+    .has-text-primary { color: var(--blue-bell) !important; }
+    .has-background-primary { background-color: var(--blue-bell) !important; }
+    .is-primary {
+      background-color: var(--school-bus-yellow) !important;
+      border-color: var(--school-bus-yellow) !important;
+      color: #0f0f0f !important;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+    }
+    .button.is-primary:hover,
+    .is-primary:hover { background-color: var(--school-bus-yellow-dark) !important; border-color: var(--school-bus-yellow-dark) !important; }
+    .button.is-primary.is-light {
+      background-color: rgba(236, 206, 104, 0.2) !important;
+      color: #876d1f !important;
+      border-color: rgba(236, 206, 104, 0.45) !important;
+    }
+    .button.is-warning {
+      background-color: var(--blue-bell) !important;
+      border-color: var(--blue-bell) !important;
+      color: #0f0f0f !important;
+    }
+    .button.is-warning.is-light {
+      background-color: rgba(135, 167, 240, 0.18) !important;
+      border-color: rgba(135, 167, 240, 0.32) !important;
+    }
+    .button.is-danger {
+      background-color: var(--dusty-rose) !important;
+      border-color: var(--dusty-rose) !important;
+      color: #fff !important;
+    }
+    .button.is-success {
+      background-color: var(--moss-green) !important;
+      border-color: var(--moss-green) !important;
+      color: #fff !important;
+    }
+
+    /* Buttons: bold with friendly corners */
+    .button { border-radius: var(--radius-base) !important; font-weight: 700 !important; }
 
     /* Dark footer */
-    .footer { background: #111; color: #fff; }
+    .footer {
+      background: var(--midnight-violet);
+      color: #fff;
+      border-top: 6px solid var(--blue-bell);
+    }
     .footer a { color: #fff; }
     .footer a:hover { color: #d6eafb; text-decoration: underline; }
     .footer a:focus { color: #d6eafb; outline: 2px solid #d6eafb; outline-offset: 2px; }
     .footer strong { color: #d6eafb; }
 
     /* Link color */
-    a { color: #112F4B; }
-    a:hover { color: #0e253b; text-decoration: underline; }
-    .navbar .navbar-item, .navbar .navbar-link { color: #112F4B; }
-    .navbar .navbar-item:hover, .navbar .navbar-link:hover { color: #0e253b; }
+    a { color: var(--midnight-violet); text-decoration: underline; }
+    a:hover { color: #2c3b3e; text-decoration: underline; }
+    .navbar .navbar-item, .navbar .navbar-link { color: var(--midnight-violet); }
+    .navbar .navbar-item:hover, .navbar .navbar-link:hover { color: var(--dusty-rose); }
     /* Navbar dropdown carets: lighter contrast */
     .navbar .navbar-link:not(.is-arrowless)::after {
-      border-color: rgba(17,47,75,0.35) !important;
+      border-color: rgba(22,16,50,0.35) !important;
     }
     .navbar .navbar-link:hover:not(.is-arrowless)::after,
     .navbar .navbar-link.is-active:not(.is-arrowless)::after,
     .navbar-item.has-dropdown.is-active > .navbar-link:not(.is-arrowless)::after {
-      border-color: rgba(14,37,59,0.35) !important;
+      border-color: rgba(193,110,112,0.55) !important;
     }
-    /* Remove shadow from Know/Love/Follow boxes */
-    #beliefs .box { box-shadow: none; }
+    /* Section layout: remove inner framing, use colored backgrounds */
+    .section.is-framed {
+      padding: 4rem 0;
+    }
+    .section.is-framed > .container {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0 1.5rem;
+      box-shadow: none;
+    }
+    .section.is-dark {
+      background: #183135;
+      color: #f5f7fb;
+    }
+    .section.is-dark h1,
+    .section.is-dark h2,
+    .section.is-dark h3,
+    .section.is-dark h4,
+    .section.is-dark h5,
+    .section.is-dark p,
+    .section.is-dark a,
+    .section.is-dark .title,
+    .section.is-dark .subtitle { color: #f5f7fb; }
+    .section.is-dark a:hover { color: #dfe8ff; }
+    /* Preserve dark text for light cards placed inside dark sections */
+    .section.is-dark .box,
+    .section.is-dark .box h1,
+    .section.is-dark .box h2,
+    .section.is-dark .box h3,
+    .section.is-dark .box h4,
+    .section.is-dark .box h5,
+    .section.is-dark .box p,
+    .section.is-dark .box a,
+    .section.is-dark .box .title,
+    .section.is-dark .box .subtitle { color: var(--midnight-violet); }
+    .section.is-dark .box a:hover { color: #2c3b3e; }
+    .section.is-gradient {
+      background: linear-gradient(45deg, #B2C4EB 0%, #8197CF 100%);
+    }
+    #whats-on {
+      background: #fff;
+    }
+    /* Beliefs section refresh */
+    #beliefs {
+      color: white;
+    }
+    #beliefs .container > .title,
+    #beliefs .container > .subtitle,
+    #beliefs .buttons a {
+      color: white;
+    }
+    #beliefs .buttons a:hover { opacity: 0.9; }
+
+    #beliefs .box {
+      background: #fff;
+      color: var(--midnight-violet);
+      border-top: 6px solid var(--blue-bell);
+      border-radius: var(--radius-base);
+      padding-top: 2rem;
+      min-height: 100%;
+      overflow: hidden;
+      box-shadow: 0 10px 26px rgba(15,15,15,0.06);
+      border: 1px solid var(--lancet-border-color);
+    }
+    #beliefs .column:nth-child(2) .box { border-top-color: var(--dusty-rose); }
+    #beliefs .column:nth-child(3) .box { border-top-color: var(--moss-green); }
+    #beliefs .box .button:not(.is-primary) {
+      border: 2px solid var(--midnight-violet);
+      color: var(--midnight-violet);
+    }
+    /* Alternate pill-title box style */
+    #beliefs .pill-box {
+      position: relative;
+      padding-top: 3.75rem;
+      overflow: visible;
+      text-align: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    #beliefs .pill-box .pill-title {
+      position: absolute;
+      top: -1.35rem;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      padding: 0.65rem 1.5rem;
+      border-radius: 999px;
+      background: #fff;
+      border: 2px solid var(--blue-bell);
+      box-shadow: 0 12px 24px rgba(15,15,15,0.08);
+      color: var(--midnight-violet);
+      letter-spacing: 0.01em;
+      text-transform: none;
+    }
+    #beliefs .column:nth-child(2) .pill-box .pill-title { border-color: var(--dusty-rose); }
+    #beliefs .column:nth-child(3) .pill-box .pill-title { border-color: var(--moss-green); }
+    #beliefs .pill-box .content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    #beliefs .pill-box .button {
+      align-self: center;
+      margin-top: 0.5rem;
+    }
+
+    .lancet-feature {
+      background: linear-gradient(180deg, rgba(193,110,112,0.08) 0%, rgba(193,110,112,0.18) 100%);
+      border-bottom: 1px solid rgba(193,110,112,0.28);
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+    .lancet-feature .columns { align-items: center; }
+    .lancet-feature .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dusty-rose);
+      margin-bottom: 0.75rem;
+    }
+    .lancet-feature .content { max-width: 32rem; }
+    .lancet-arch-figure {
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .lancet-arch-figure img,
+    .lancet-arch-figure svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 20px 40px rgba(22,16,50,0.12));
+    }
+    .lancet-arch-note {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: rgba(22,16,50,0.7);
+    }
+
+    /* Accent ribbons for Resources boxes */
+    #resources {
+      background: var(--resource-plum);
+    }
+    #resources > .container > .title,
+    #resources > .container > .subtitle {
+      color: #fff;
+    }
+    #resources .box {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-base);
+      padding-top: 2rem;
+    }
+    #resources .box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--blue-bell), var(--school-bus-yellow));
+    }
+
+    #resources .column:nth-child(2) .box::before {
+      background: linear-gradient(90deg, var(--dusty-rose), var(--moss-green));
+    }
+    #resources .column:nth-child(3) .box::before {
+      background: linear-gradient(90deg, var(--midnight-violet), var(--blue-bell));
+    }
+
+    /* Card & box borders for extra definition */
+    .box {
+      border: 1px solid var(--lancet-border-color);
+      border-radius: var(--radius-base);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      box-shadow: 0 8px 22px rgba(15,15,15,0.05);
+      background: #fff;
+    }
+
+    /* Equal-height cards/boxes within multiline variable columns */
+    .columns.is-multiline.is-variable.is-5 > .column {
+      display: flex;
+    }
+    .columns.is-multiline.is-variable.is-5 > .column > .overlay-card,
+    .columns.is-multiline.is-variable.is-5 > .column > .card,
+    .columns.is-multiline.is-variable.is-5 > .column > .box {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar underline accent for hover */
+    .navbar-item.is-active,
+    .navbar .navbar-item:hover {
+      border-bottom: 3px solid var(--blue-bell);
+    }
   </style>
 </head>
 <body>
@@ -188,7 +582,7 @@
         <h2 class="subtitle is-4">We aim to Know, Love & Follow Jesus</h2>
         <div class="buttons">
           <a class="button is-primary is-large" href="#online">Watch Live</a>
-          <a class="button is-warning is-light is-large" href="#new-here">Plan Your First Visit</a>
+          <a class="button is-light is-large" href="#new-here">Plan Your First Visit</a>
         </div>
       </div>
     </div>
@@ -196,13 +590,13 @@
 
   <main id="main" role="main">
     <!-- What's On This Week -->
-    <section class="section" id="whats-on">
+    <section class="section is-framed is-gradient" id="whats-on">
       <div class="container">
         <h2 class="title is-3">What’s On This Week</h2>
         <div class="columns is-variable is-5 is-multiline">
           <!-- Sun 10:00 All-age Service -->
-          <div class="column is-12-tablet is-3-desktop">
-            <div class="card overlay-card">
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card card-theme-violet">
               <a class="overlay-link" href="#online">
                 <div class="card-image">
                   <figure class="image is-16by9">
@@ -220,8 +614,8 @@
         </div>
 
           <!-- Sun 18:00 Praise & Prayer -->
-          <div class="column is-12-tablet is-3-desktop">
-            <div class="card overlay-card">
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card card-theme-rose">
               <a class="overlay-link" href="#whats-on">
                 <div class="card-image">
                   <figure class="image is-16by9">
@@ -239,8 +633,8 @@
           </div>
 
           <!-- Tue 10:00 Tots on Tuesday -->
-          <div class="column is-12-tablet is-3-desktop">
-            <div class="card overlay-card">
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card card-theme-sunrise">
               <a class="overlay-link" href="#families">
                 <div class="card-image">
                   <figure class="image is-16by9">
@@ -258,8 +652,8 @@
           </div>
 
           <!-- Thu 19:30 Homegroups -->
-          <div class="column is-12-tablet is-3-desktop">
-            <div class="card overlay-card">
+          <div class="column is-12-tablet is-4-desktop">
+            <div class="card overlay-card card-theme-moss">
               <a class="overlay-link" href="#groups">
                 <div class="card-image">
                   <figure class="image is-16by9">
@@ -284,14 +678,14 @@
     </section>
 
     <!-- Beliefs: Know, Love & Follow Jesus -->
-    <section class="section" id="beliefs">
+    <section class="section is-framed is-dark" id="beliefs">
       <div class="container">
         <h2 class="title is-3">Know, Love & Follow Jesus</h2>
         <p class="subtitle is-5">We aim to Know, Love & Follow Jesus</p>
         <div class="columns is-variable is-5 is-multiline">
           <div class="column is-12-tablet is-4-desktop">
-            <div class="box" style="border-radius:0;">
-              <h3 class="title is-4">Know</h3>
+            <div class="box pill-box">
+              <h3 class="title is-4 pill-title">Know</h3>
               <div class="content">
                 <p>If God exists, how would we know? Christians believe God made himself known in Jesus of Nazareth. Through his life, death and resurrection we can know God, receive forgiveness and share new life.</p>
                 <p>These are extraordinary claims. We’d love to explain why we believe. Alpha is a relaxed space to ask big questions.</p>
@@ -300,8 +694,8 @@
             </div>
           </div>
           <div class="column is-12-tablet is-4-desktop">
-            <div class="box" style="border-radius:0;">
-              <h3 class="title is-4">Love</h3>
+            <div class="box pill-box">
+              <h3 class="title is-4 pill-title">Love</h3>
               <div class="content">
                 <p>Knowing God leads to love for God and others. As we open the Bible and gather on Sundays and in small groups, God’s Spirit grows a strong, transforming love that makes a real difference.</p>
                 <p>It’s the kind of love that empowered Jesus to give his life—and it shapes us today.</p>
@@ -310,8 +704,8 @@
             </div>
           </div>
           <div class="column is-12-tablet is-4-desktop">
-            <div class="box" style="border-radius:0;">
-              <h3 class="title is-4">Follow</h3>
+            <div class="box pill-box">
+              <h3 class="title is-4 pill-title">Follow</h3>
               <div class="content">
                 <p>Following Jesus is a daily calling—speaking good news and living to honour him in our communities. It’s not always easier, but it’s a great adventure with God at work.</p>
                 <p>You’re invited to discover what it means to know, love and follow him.</p>
@@ -327,75 +721,75 @@
     </section>
 
     <!-- Explore Church Life -->
-    <section class="section" id="explore">
+    <section class="section is-framed" id="explore">
       <div class="container">
         <h2 class="title is-3">Explore Church Life</h2>
         <div class="columns is-multiline is-variable is-5">
           <div class="column is-12-tablet is-4-desktop">
-            <div class="card overlay-card" id="sundays">
+            <div class="card overlay-card card-theme-violet" id="sundays">
               <a class="overlay-link" href="#sundays">
                 <div class="card-image">
                   <figure class="image is-16by9">
                     <img src="https://static.photos/people/640x360/301" alt="Sundays & Services">
                   </figure>
                   <div class="card-title-overlay">
-                    <h3 class="title is-2">Sundays & Services</h3>
+                    <h3 class="title is-4">Sundays & Services</h3>
                   </div>
                 </div>
               </a>
             </div>
           </div>
           <div class="column is-12-tablet is-4-desktop">
-            <div class="card overlay-card">
+            <div class="card overlay-card card-theme-sunrise">
               <a class="overlay-link" href="#families">
                 <div class="card-image">
                   <figure class="image is-16by9">
                     <img src="kids-group.png" alt="Families & Kids">
                   </figure>
                   <div class="card-title-overlay">
-                    <h3 class="title is-2">Families & Kids</h3>
+                    <h3 class="title is-4">Families & Kids</h3>
                   </div>
                 </div>
               </a>
             </div>
           </div>
           <div class="column is-12-tablet is-4-desktop">
-            <div class="card overlay-card">
+            <div class="card overlay-card card-theme-bluebell">
               <a class="overlay-link" href="#youth">
                 <div class="card-image">
                   <figure class="image is-16by9">
                     <img src="https://static.photos/people/640x360/303" alt="Youth & Young Adults">
                   </figure>
                   <div class="card-title-overlay">
-                    <h3 class="title is-2">Youth & Young Adults</h3>
+                    <h3 class="title is-4">Youth & Young Adults</h3>
                   </div>
                 </div>
               </a>
             </div>
           </div>
           <div class="column is-12-tablet is-4-desktop">
-            <div class="card overlay-card">
+            <div class="card overlay-card card-theme-moss">
               <a class="overlay-link" href="#directory">
                 <div class="card-image">
                   <figure class="image is-16by9">
                     <img src="https://static.photos/people/640x360/304" alt="Member Directory">
                   </figure>
                   <div class="card-title-overlay">
-                    <h3 class="title is-2">Member Directory</h3>
+                    <h3 class="title is-4">Member Directory</h3>
                   </div>
                 </div>
               </a>
             </div>
           </div>
           <div class="column is-12-tablet is-4-desktop">
-            <div class="card overlay-card">
+            <div class="card overlay-card card-theme-rose">
               <a class="overlay-link" href="#serve">
                 <div class="card-image">
                   <figure class="image is-16by9">
                     <img src="https://static.photos/people/640x360/305" alt="Community & Volunteering">
                   </figure>
                   <div class="card-title-overlay">
-                    <h3 class="title is-2">Community & Volunteering</h3>
+                    <h3 class="title is-4">Community & Volunteering</h3>
                   </div>
                 </div>
               </a>
@@ -406,9 +800,9 @@
     </section>
 
     <!-- Meet our Priest in Charge -->
-    <section class="section" id="story">
+    <section class="section is-framed" id="story">
       <div class="container">
-        <div class="box" style="border-radius:0;">
+        <div class="box">
           <article class="media">
             <figure class="media-left">
               <p class="image is-128x128">
@@ -429,24 +823,24 @@
     </section>
 
     <!-- Resources -->
-    <section class="section" id="resources">
+    <section class="section is-framed is-gradient" id="resources">
       <div class="container">
         <h2 class="title is-3">Resources</h2>
         <div class="columns is-variable is-5 is-multiline">
           <div class="column is-12-tablet is-4-desktop">
-            <div class="box" style="border-radius:0;">
+            <div class="box">
               <h3 class="title is-5">Download Weekly Sheet (PDF)</h3>
               <a class="button is-primary" href="#weekly-sheet">Download</a>
             </div>
           </div>
           <div class="column is-12-tablet is-4-desktop">
-            <div class="box" style="border-radius:0;">
+            <div class="box">
               <h3 class="title is-5">Bible Reading & Prayer Guides</h3>
               <a class="button" href="#prayer">Open Resources</a>
             </div>
           </div>
           <div class="column is-12-tablet is-4-desktop">
-            <div class="box" style="border-radius:0;">
+            <div class="box">
               <h3 class="title is-5">Watch Past Services</h3>
               <a class="button" href="#watch-past">View</a>
         </div>
